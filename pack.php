@@ -1,4 +1,7 @@
 <?php
+
+include("secret.php");
+
 $base="."; 
 
 $force=isset($_GET['force']);

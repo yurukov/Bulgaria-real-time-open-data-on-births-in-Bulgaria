@@ -1,4 +1,7 @@
 <?php
+
+include("secret.php");
+
 ini_set('user_agent','Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.7 (KHTML, like Gecko) Chrome/16.0.912.63 Safari/535.7'); 
 
 $baseurl="http://212.5.144.219";
