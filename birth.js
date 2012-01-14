@@ -72,6 +72,8 @@ function init() {
 }
 
 function drawChart(region) {
+	if (region && region.region.substring(0,2)!="BG")
+		region=false;
 	colchartregion=region;
 
 	var begin = displacement($("#slider-range").slider("values",0));
@@ -94,7 +96,7 @@ function drawChart(region) {
 		}
 	}
 
-	$("#colchart-text").text(regionName ? " за "+regionName : "");
+	$("#colchart-text").text(regionName ? "в "+regionName : "за страната");
 	var data = new google.visualization.DataTable();
 	data.addColumn('string', 'Дата');
 	data.addColumn('number', 'Раждания'+(regionName ? " в "+regionName : ""));
@@ -140,9 +142,12 @@ function drawVisualization(begin, end) {
 
 	chartblock=true;
 	geochart.draw(data, {width: 700, height: 436, region:"BG", resolution:"provinces"});
+	
 }
 
 function drawIfReady() {
+	//add a click clue on the active regions
+	$('#visualizationMap iframe').contents().find("path[fill='#ffffff']").css("cursor","pointer");
 	if (chartblock.begin)
 		drawVisualization(chartblock.begin, chartblock.end);
 	else

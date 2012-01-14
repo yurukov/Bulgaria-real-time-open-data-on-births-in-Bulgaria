@@ -109,8 +109,13 @@ for ($j=0;$j<1000;$j++) {
 	unset($one);
 	unset($matches);
 }
-copy("rajdaemost.csv.gz","rajdaemost".date("YmdHis").".csv.gz");
 
+if (count($data)<2) {
+	echo "Error loading birth data";
+	exit;	
+}
+
+copy("rajdaemost.csv.gz","rajdaemost".date("YmdHis").".csv.gz");
 $fgz = fopen ( "rajdaemost.csv.gz", 'w' );
 fwrite ( $fgz , gzencode ( $header."\n".implode("\n",$data) , 9 ) );
 fclose ( $fgz  );
