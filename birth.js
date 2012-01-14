@@ -103,7 +103,7 @@ function drawChart(region) {
 
 	if (colchart==false)
 		colchart = new google.visualization.ColumnChart(document.getElementById('visualizationChart'));
-	colchart.draw(data,{width:700,height:300,colors:['green'],legend: {position: "none"},animation:{'duration':1000}});
+	colchart.draw(data,{width:700,height:300,colors:['green'],legend: {position: "none"},animation:{'duration':1000}, chartArea:{left:30,top:10,width:670,height:240}, vAxis:{minValue:0}});
 }
 
 function drawVisualization(begin, end) {

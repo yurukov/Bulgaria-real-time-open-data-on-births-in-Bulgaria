@@ -1,132 +1,109 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="bg-BG" itemscope itemtype="http://schema.org/Organization">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <title>Отворени данни в реално време за раждаемостта в България</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>Отворени данни в реално време за раждаемостта в България</title>
 
-  <link rel="image_src" type="image/jpg" href="mymap.jpg" />
-  <meta itemprop="name" content="Отворени данни за раждаемостта"/>
-  <meta itemprop="description" content="Отворени данни в реално време за раждаемостта спрямо населението в България"/>
-  <meta itemprop="image" content="mymap.jpg"/>
+	<link rel="image_src" type="image/jpg" href="mymap.jpg" />
+	<meta itemprop="name" content="Отворени данни за раждаемостта"/>
+	<meta itemprop="description" content="Отворени данни в реално време за раждаемостта спрямо населението в България"/>
+	<meta itemprop="image" content="mymap.jpg"/>
 
-  <link type="text/css" href="css/south-street/jquery-ui-1.8.17.custom.css" rel="stylesheet" />	
-  <style type="text/css">
-	body {
-		font-family:Verdana;
-	}
-	.ui-slider {
-		font-size: 90%;
-		width:700px;
-	}
-	.ui-button-text-only {
-		font-size: 85%;
-		margin:5px 0;
-	}
-	#dataCalc, #periodCalc {
-		margin-bottom:10px;
-		text-align:center;
-	}
-	#slider-census-range, #slider-range {
-		margin-top:5px;
-	} 
-	.ui-widget-header { 
-		background: #a3cb99;
-	}
-  </style>
-
+	<link type="text/css" href="css/south-street/jquery-ui-1.8.17.custom.css" rel="stylesheet" />	
+	<link type="text/css" href="css/rajdaemost.css" rel="stylesheet" />	
 </head>
 <body>
-<div style="width:700px; margin: 0 auto;">
+	<div id="wrapper">
 
-<div style="float:right;">
-	<div class="g-plusone" data-size="tall"></div>
-</div><div style="float:right;margin-right:5px;">
-	<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fopendata.yurukov.net%2Fbirth%2F&amp;send=false&amp;layout=box_count&amp;width=100&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=90&amp;appId=228270853886391" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:90px;" allowTransparency="true"></iframe>
-</div>
-<div style="float:right;margin-right:10px;margin-left:20px">
-	<a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical" data-url="http://yurukov.net/opendata/birth/">Tweet</a>
-</div>
-<p>
-	<a href="http://yurukov.net/blog/2012/01/10/danni-za-rajdaemostta-v-bg/">Статията ми за тези данни</a><br/>
-	<a href="http://yurukov.net/blog/?s=%D0%BE%D1%82%D0%B2%D0%BE%D1%80%D0%B5%D0%BD%D0%B8+%D0%B4%D0%B0%D0%BD%D0%BD%D0%B8">Други статии за отворени данни</a><br/>
-	<a href="rajdaemost.csv">Свали последните данни тук</a><br/>
-	<a href="http://yurukov.net/blog/contact/">Контакт</a>
-</p>
+		<div id="button1">
+			<div class="g-plusone" data-size="tall"></div>
+		</div>
+		<div id="button2">
+			<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fopendata.yurukov.net%2Fbirth%2F&amp;send=false&amp;layout=box_count&amp;width=100&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=90&amp;appId=228270853886391" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+		</div>
+		<div id="button3">
+			<a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical" data-url="http://yurukov.net/opendata/birth/">Tweet</a>
+		</div>
+		<p>
+			<a href="http://yurukov.net/blog/2012/01/10/danni-za-rajdaemostta-v-bg/">Статията ми за тези данни</a><br/>
+			<a href="http://yurukov.net/blog/?s=%D0%BE%D1%82%D0%B2%D0%BE%D1%80%D0%B5%D0%BD%D0%B8+%D0%B4%D0%B0%D0%BD%D0%BD%D0%B8">Други статии за отворени данни</a><br/>
+			<a href="rajdaemost.csv">Свали последните данни тук</a><br/>
+			<a href="http://yurukov.net/blog/contact/">Контакт</a>
+		</p>
 
-<h2 style="clear:both;text-align:center;margin:50px;">Отворени данни в реално време за раждаемостта спрямо населението в България</h2>
+		<h2>Отворени данни в реално време за раждаемостта спрямо населението в България</h2>
 
-<!--p style="color:red;"><i>В момента правя някои промени по скрипта и затова може да се получават грешки от време на време.</i></p-->
+		<!--p style="color:red;"><i>В момента правя някои промени по скрипта и затова може да се получават грешки от време на време.</i></p-->
 
-	Покажи на графиката:
-	<div id="dataCalc">
-		<input type="radio" id="dataCalc1" name="dataCalc"/>
-		<label for="dataCalc1">Абсолютна стойност на ражданията</label>
-		<input type="radio" id="dataCalc2" name="dataCalc"/>
-		<label for="dataCalc2">Спрямо населението на регионите</label>
+		Покажи на графиката:
+		<div id="dataCalc">
+			<input type="radio" id="dataCalc1" name="dataCalc"/>
+			<label for="dataCalc1">Абсолютна стойност на ражданията</label>
+			<input type="radio" id="dataCalc2" name="dataCalc"/>
+			<label for="dataCalc2">Спрямо населението на регионите</label>
+		</div>
+		<div id="age-selector">
+			Изчисли относителните раждания:
+			<div id="periodCalc">
+				<input type="radio" id="periodCalc1" name="periodCalc"/>
+				<label for="periodCalc1">За избрания период от време</label>
+				<input type="radio" id="periodCalc2" name="periodCalc"/>
+				<label for="periodCalc2">Нормализирано за месец</label>
+			</div>
+
+			Избери възрастова група: <span id="span-age"></span>
+			<div id="slider-census-range"></div>
+		</div>
+		<div id="date-selector">	
+			Избери с лентата период: <span id="date-amount"></span> <span id="date-warning"></span>
+			<div id="slider-range"></div>
+		</div>
+
+		<div id="visualizationMap"><div class="loading-text">...Зарежда се...</div></div>
+		<p>
+			<b>Брой регистрирани раждания по дни<span id="colchart-text"></span></b><br/>
+			<i><a href="javascript:;" onclick="drawChart()">Покажи за цяла България</a>. Натиснете на регион от картата горе, за да видите ражданията по дни на долната графика</i>
+		</p>
+		<div id="visualizationChart"><div class="loading-text">...Зарежда се...</div></div>
+
+		<p class="explain-top explain">
+			<i>Данните за ражданията са свалени автоматично от <a href="http://www.mh.government.bg/Articles.aspx?lang=bg-BG&amp;pageid=492">системата</a> на здравното министерство и обърнати в отворен формат. <b>Преди 1. януари 2012</b> повечето АГ отделения не са подавали информация. От тогава насам би трябвало информацията да е точна.</i><br/>
+		</p>
+		<p class="explain">
+			<i>Данните за населението са от <a href="http://www.nsi.bg/census2011/index.php">последното преброяване</a> и са актуални към февруари месец 2011</i><br/>
+		</p>
+		<p class="explain">
+			<i>Oпцията за нормализиране на относителните раждания не променя графиката, а само бройката на ражданията. С нея се изчислява колко деца биха се родили на 10000 души от избраната възрастова група <b>средно на месец</b>. Това е изчислява като се вземе средната стойност на ражданията за избрания период и се уможи по 30.5, колкото са средно дните в един месец.</i><br/>
+		</p>
 	</div>
-<div id="age-selector" style="display:none;">
-	Изчисли относителните раждания:
-	<div id="periodCalc">
-		<input type="radio" id="periodCalc1" name="periodCalc"/>
-		<label for="periodCalc1">За избрания период от време</label>
-		<input type="radio" id="periodCalc2" name="periodCalc"/>
-		<label for="periodCalc2">Нормализирано за месец</label>
-	</div>
 
-	Избери възрастова група: <span id="span-age" style="font-weight:bold;" ></span>
-	<div id="slider-census-range"></div>
-</div>
-<div style="margin:15px 0;">	
-	Избери с лентата период: <span id="date-amount" style="font-weight:bold;" ></span> <span id="date-warning" style="font-size:80%; color:red; font-style: italic;"></span>
-	<div id="slider-range"></div>
-</div>
-<div id="visualizationMap"><div style="text-align:center; color:green;">...Зарежда се...</div></div>
-<p>
-<b>Брой регистрирани раждания по дни<span id="colchart-text"></span></b><br/>
-<i><a href="javascript:;" onclick="drawChart()">Покажи за цяла България</a>. Натиснете на регион от картата горе, за да видите ражданията по дни на долната графика</i>
-</p>
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="birth.js"></script>
 
-<div id="visualizationChart"><div style="text-align:center; color:green;">...Зарежда се...</div></div>
+	<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+	<script type="text/javascript">
+		window.___gcfg = {lang: 'bg'};
 
-<p style="font-size:90%; margin-top:40px;padding-top:30px;border-top:1px dashed gray;">
-<i>Данните за ражданията са свалени автоматично от <a href="http://www.mh.government.bg/Articles.aspx?lang=bg-BG&amp;pageid=492">системата</a> на здравното министерство и обърнати в отворен формат. <b>Преди 1. януари 2012</b> повечето АГ отделения не са подавали информация. От тогава насам би трябвало информацията да е точна.</i><br/>
-</p>
-<p style="font-size:90%">
-<i>Данните за населението са от <a href="http://www.nsi.bg/census2011/index.php">последното преброяване</a> и са актуални към февруари месец 2011</i><br/>
-</p>
-<p style="font-size:90%">
-<i>Oпцията за нормализиране на относителните раждания не променя графиката, а само бройката на ражданията. С нея се изчислява колко деца биха се родили на 10000 души от избраната възрастова група <b>средно на месец</b>. Това е изчислява като се вземе средната стойност на ражданията за избрания период и се уможи по 30.5, колкото са средно дните в един месец.</i><br/>
-</p>
-</div>
+		(function() {
+			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			po.src = 'https://apis.google.com/js/plusone.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		})();
+	</script>
 
-<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-<script type="text/javascript" src="birth.js"></script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-2905006-14']);
+		_gaq.push(['_trackPageview']);
 
-<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-<script type="text/javascript">
-  window.___gcfg = {lang: 'bg'};
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
 
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>
-
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-2905006-14']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
+	</script>
 </body>
 </html>

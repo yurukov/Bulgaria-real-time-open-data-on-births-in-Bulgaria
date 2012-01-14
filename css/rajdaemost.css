@@ -1,0 +1,73 @@
+body {
+	font-family:Verdana;
+}
+.ui-slider {
+	font-size: 90%;
+	width:700px;
+}
+.ui-button-text-only {
+	font-size: 85%;
+	margin:5px 0;
+}
+#dataCalc, #periodCalc {
+	margin-bottom:10px;
+	text-align:center;
+}
+#slider-census-range, #slider-range {
+	margin-top:5px;
+} 
+.ui-widget-header { 
+	background: #a3cb99;
+}
+
+#wrapper {
+	width:700px;
+	margin: 0 auto;
+}
+#button1 {
+	float:right;
+}
+#button2 {
+	float:right;
+	margin-right:5px;
+}
+#button2 iframe {
+	border:none; overflow:hidden; width:100px; height:90px;
+}
+#button3 {
+	float:right;
+	margin-right:10px;
+	margin-left:20px
+}
+	
+h2 {
+	clear:both;
+	text-align:center;
+	margin:50px;
+}
+#age-selector {
+	display:none;
+}
+#span-age, #date-amount {
+	font-weight:bold;
+}
+#date-warning {
+	font-size:80%; 
+	color:red; 
+	font-style: italic;
+}
+#date-selector {
+	margin:15px 0;
+}
+.loading-text {
+	text-align:center; 
+	color:green;
+}
+.explain {
+	font-size:90%
+}
+.explain-top {
+	margin-top:40px;
+	padding-top:30px;
+	border-top:1px dashed gray;
+}
