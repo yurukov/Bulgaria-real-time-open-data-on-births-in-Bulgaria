@@ -1,5 +1,7 @@
 body {
 	font-family:Verdana;
+	margin:0px;
+	padding:0px;
 }
 .ui-slider {
 	font-size: 90%;
@@ -9,20 +11,21 @@ body {
 	font-size: 85%;
 	margin:5px 0;
 }
+
 #dataCalc, #periodCalc {
-	margin-bottom:10px;
 	text-align:center;
+	margin-right:0;
 }
 #slider-census-range, #slider-range {
 	margin-top:5px;
 } 
 .ui-widget-header { 
-	background: #a3cb99;
+	background: #259e2b;
 }
 
 #wrapper {
 	width:700px;
-	margin: 0 auto;
+	margin: 10px auto 100px auto;
 }
 #button1 {
 	float:right;
@@ -45,9 +48,6 @@ h2 {
 	text-align:center;
 	margin:50px;
 }
-#age-selector {
-	display:none;
-}
 #span-age, #date-amount {
 	font-weight:bold;
 }
@@ -56,18 +56,41 @@ h2 {
 	color:red; 
 	font-style: italic;
 }
-#date-selector {
-	margin:15px 0;
+#date-selector, #age-selector {
+	margin-bottom:15px;
 }
 .loading-text {
 	text-align:center; 
 	color:green;
 }
-.explain {
-	font-size:90%
+
+#info-box {
+	width:700px;
+	overflow-x:hidden;	
 }
-.explain-top {
-	margin-top:40px;
-	padding-top:30px;
+#info-box div {
+	width:2106px;
+	position:relative;
+}
+#info-box div div {
+	float:left;
+	width:660px;
 	border-top:1px dashed gray;
+	border-bottom:1px dashed gray;
+	margin:12px 20px;
+	padding:6px 0;
+	font-size:80%;
+	font-style: italic;	
+	text-align: justify;
+}	
+#info-box1 {
+	font-size:80%;
+	font-style: italic;
 }
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #d4ccb0; background: #fafaf4 url(south-street/images/ui-bg_highlight-hard_100_fafaf4_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #459e00; }
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #459e00; text-decoration: none; }
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 1px solid #327e04; background: #459e00 url(south-street/images/ui-bg_highlight-hard_15_459e00_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #ffffff; }
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #ffffff; text-decoration: none; }
+
+

@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="bg-BG" itemscope itemtype="http://schema.org/Organization">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>Real time open data for the births in Bulgaria</title>
+
+	<link rel="image_src" type="image/jpg" href="/birth/mymap.jpg" />
+	<meta itemprop="name" content="Birth open data"/>
+	<meta itemprop="description" content="Real time open data for the births in Bulgaria"/>
+	<meta itemprop="image" content="/birth/mymap.jpg"/>
+
+	<link type="text/css" href="/birth/css/south-street/jquery-ui-1.8.17.custom.css" rel="stylesheet" />	
+	<link type="text/css" href="/birth/css/rajdaemost.css" rel="stylesheet" />	
+</head>
+<body>
+	<div id="wrapper">
+
+		<div id="button1">
+			<div class="g-plusone" data-size="tall"></div>
+		</div>
+		<div id="button2">
+			<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fopendata.yurukov.net%2Fbirth%2F&amp;send=false&amp;layout=box_count&amp;width=100&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=90&amp;appId=228270853886391" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+		</div>
+		<div id="button3">
+			<a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical" data-url="http://yurukov.net/opendata/birth/">Tweet</a>
+		</div>
+		<p>
+			<a href="/birth">Тази страница на български</a><br/>
+			<a href="http://yurukov.net/blog/2012/01/10/danni-za-rajdaemostta-v-bg/">My article on this data</a> <small>(in BG)</small><br/>
+			<a href="http://yurukov.net/blog/?s=%D0%BE%D1%82%D0%B2%D0%BE%D1%80%D0%B5%D0%BD%D0%B8+%D0%B4%D0%B0%D0%BD%D0%BD%D0%B8">Other articles on open data</a> <small>(in BG)</small><br/>
+			<a href="rajdaemost.csv">Download the latest data here</a><br/>
+			<a href="http://twitter.com/yurukov">Contact</a>
+
+		</p>
+
+		<h2>Real time open data for births relative to population in Bulgaria</h2>
+
+
+		Show the number of births on the map:
+		<div id="dataCalc">
+			<input type="radio" id="dataCalc1" name="dataCalc"/>
+			<label for="dataCalc1">As absolute value</label>
+			<input type="radio" id="dataCalc2" name="dataCalc"/>
+			<label for="dataCalc2">Relative to population</label>
+			<input type="radio" id="dataCalc3" name="dataCalc"/>
+			<label for="dataCalc3">Relative to 2010</label>
+		</div>
+		<div id="info-box">
+			<div id="info-box-slider">
+			<div>
+The data for the births are scraped automatically from the Health ministry's <a href="http://www.mh.government.bg/Articles.aspx?lang=bg-BG&amp;pageid=492">system</a> and converted into an open format. <b>Previous to 1. Jan 2012</b>, many hospitals weren't connected, but since then the data should be precise. You could <b>choose</b> which date peroiod to show on the map by moving the sliders below. When <b>clicking</b> on a region on the map, you will see in the chart below the day-to-day statistics for it.
+			</div>
+			<div>
+The population data is taken from the last <a href="http://www.nsi.bg/census2011/index.php">census</a> and are accurate as of Feb 2011. You can <b>select</b> an age group from the slider below. When <b>moving</b> over a region on the map, you will see how many births there were during the selected period of time relative to 10000 people of the selected age group.
+			</div>
+			<div>
+Data on the birth rates in 2010 is taken from the <a href="http://www.nsi.bg/otrasal.php?otr=19">National Statistics Institute</a>. As we don't have a breakdown by days or months, the calculations are made by taking the births for the whole 2010 (for example: Plovdiv = 7248), dividing them by 365 and multiplying them by the number of days in the selected period (for example: 14). Then the data on the map represents the change of the current births relative to the average birth date in 2010. Thus for the first two weeks of 2010 Plovdiv is lagging behind with 4.68%.
+			</div>
+			</div>
+		</div>
+		<div id="date-selector">	
+			Choose a period of time: <span id="date-amount"></span> <span id="date-warning"></span>
+			<div id="slider-range"></div>
+		</div>
+		<div id="age-selector" style="display:none;">
+			Choose an age group: <span id="span-age"></span>
+			<div id="slider-census-range"></div>
+		</div>
+
+		<div id="visualizationMap"><div class="loading-text">...Loading...</div></div>
+		<p>
+			<b>Number of registered births by days <span id="colchart-text">statewide</span></b>
+		</p>
+		<p id="info-box1">
+			<a href="javascript:;" onclick="drawChart()">Reload statewide</a>. Press on any region on the map to show the day-to-day statistics there.
+		</p>
+		<div id="visualizationChart"><div class="loading-text">...Loading...</div></div>
+
+	</div>
+
+	<script type="text/javascript" src="/birth/js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="/birth/js/jquery-ui-1.8.17.custom.min.js"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="/birth/js/lang_en.js"></script>
+	<script type="text/javascript" src="/birth/js/birth.js"></script>
+
+	<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+	<script type="text/javascript">
+		window.___gcfg = {lang: 'bg'};
+
+		(function() {
+			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			po.src = 'https://apis.google.com/js/plusone.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		})();
+	</script>
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-2905006-14']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+
+	</script>
+</body>
+</html>

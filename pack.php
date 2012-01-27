@@ -4,6 +4,8 @@ include("secret.php");
 
 $base="."; 
 
+$ignore = array("proxy.csv","mapping.csv");
+
 $force=isset($_GET['force']);
 
 $all1=0;
@@ -15,7 +17,7 @@ if ($all1>0)
 	echo "<br/><span style='color:green'>Overall: ".$all1."/".$all2." ".round(100-$all2/$all1*100)."% reduction</span>";
 
 function pack_file($path) {
-	global $force, $all1, $all2;
+	global $force, $all1, $all2, $ignore;
 	if (is_dir($path)) {
 		if ($handle = opendir($path)) {
 			while (false !== ($file = readdir($handle)))
@@ -24,7 +26,7 @@ function pack_file($path) {
 		}
 		closedir($handle);
 	} else 
-	if (substr($path,-4)==".css" || substr($path,-3)==".js" || substr($path,-5)==".html" || substr($path,-4)==".csv") {
+	if (!in_array(substr($path,2),$ignore) && (substr($path,-4)==".css" || substr($path,-3)==".js" || substr($path,-5)==".html" || substr($path,-4)==".csv")) {
 		if (!$force && file_exists($path.".gz") && filectime($path)<filectime($path.".gz")) {
 			echo "<span style='color:gray'>$path ... no update. Skip</span><br/>";
 		} else {
