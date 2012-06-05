@@ -43,7 +43,7 @@
 			<input type="radio" id="dataCalc2" name="dataCalc"/>
 			<label for="dataCalc2">Relative to population</label>
 			<input type="radio" id="dataCalc3" name="dataCalc"/>
-			<label for="dataCalc3">Relative to 2010</label>
+			<label for="dataCalc3">Relative to past years</label>
 		</div>
 		<div id="info-box">
 			<div id="info-box-slider">
@@ -51,10 +51,10 @@
 The data for the births are scraped automatically from the Health ministry's <a href="http://www.mh.government.bg/Articles.aspx?lang=bg-BG&amp;pageid=492">system</a> and converted into an open format. <b>Previous to 1. Jan 2012</b>, many hospitals weren't connected, but since then the data should be precise. You could <b>choose</b> which date peroiod to show on the map by moving the sliders below. When <b>clicking</b> on a region on the map, you will see in the chart below the day-to-day statistics for it.
 			</div>
 			<div>
-The population data is taken from the last <a href="http://www.nsi.bg/census2011/index.php">census</a> and are accurate as of Feb 2011. You can <b>select</b> an age group from the slider below. When <b>moving</b> over a region on the map, you will see how many births there were during the selected period of time relative to 10000 people of the selected age group.
+The population data is taken from the last <a href="http://www.nsi.bg/census2011/index.php">census</a> and are accurate as of Feb 2011. You can <b>select</b> an age group from the slider below. When <b>moving</b> over a region on the map, you will see how many births there would be <b>monthly</b> relative to 10000 people of the selected age group, if we take the data from the selected period of time.
 			</div>
 			<div>
-Data on the birth rates in 2010 is taken from the <a href="http://www.nsi.bg/otrasal.php?otr=19">National Statistics Institute</a>. As we don't have a breakdown by days or months, the calculations are made by taking the births for the whole 2010 (for example: Plovdiv = 7248), dividing them by 365 and multiplying them by the number of days in the selected period (for example: 14). Then the data on the map represents the change of the current births relative to the average birth date in 2010. Thus for the first two weeks of 2010 Plovdiv is lagging behind with 4.68%.
+Data on the birth rates from previous years is taken from the <a href="http://www.nsi.bg/otrasal.php?otr=19">National Statistics Institute</a>. As we don't have a breakdown by days or months, the calculations are made by taking the births for the whole selected year (for example: Plovdiv = 7248), dividing them by 365 or 366 and multiplying them by the number of days in the selected period (for example: 14). Then the data on the map represents the change of the current births relative to the average birth date in the past years. Thus for the first two weeks of 2012 Plovdiv is lagging behind with 4.68% relative to 2010.
 			</div>
 			</div>
 		</div>
@@ -66,7 +66,10 @@ Data on the birth rates in 2010 is taken from the <a href="http://www.nsi.bg/otr
 			Choose an age group: <span id="span-age"></span>
 			<div id="slider-census-range"></div>
 		</div>
-
+		<div id="year-selector" style="display:none;">
+			Choose an year for comparison: <span id="span-year"></span>
+			<div id="slider-year"></div>
+		</div>
 		<div id="visualizationMap"><div class="loading-text">...Loading...</div></div>
 		<p>
 			<b>Number of registered births by days <span id="colchart-text">statewide</span></b>

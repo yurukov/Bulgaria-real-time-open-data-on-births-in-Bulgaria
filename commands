@@ -1,0 +1,11 @@
+i=-1; for f in rb_*; do i=`expr $i + 1`; iconv --from-code CP1251 --to-code utf8 > "i"$i".csv" < "rb_report ("$i").csv"; done
+rm rb_*; sed -i 's_"__g' i*
+for f in i*.csv; do sort $f > "s"$f; done
+sed 's_,.*__' i0.csv | sort -u > names; rm i*.csv
+sed -i 's_.*,__' si*
+all=`echo "names"; i=30; for f in si*; do i=\`expr $i - 1;\`; echo -n "si"$i".csv "; done`; paste -d "\t" $all > roj.csv
+
+for ((i=30; i >=1 ; i--)); do echo -n $i".04.2012 "; done
+sed -i 's_"__g' rajdaemost.csv
+sed -i 's_\t_,_g' rajdaemost.csv
+gzip rajdaemost.csv

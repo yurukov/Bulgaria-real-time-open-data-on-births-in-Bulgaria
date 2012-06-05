@@ -50,6 +50,8 @@
   ExpiresByType image/gif "modification plus 2 year"
 </IfModule>
 
+AddDefaultCharset UTF-8
+
 <IfModule mod_rewrite.c>
 Options +FollowSymlinks
 RewriteEngine On

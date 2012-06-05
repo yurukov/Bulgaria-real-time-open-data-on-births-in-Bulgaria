@@ -1,8 +1,10 @@
 birthData=false;
 censusData=false;
-birth10Data=false;
+birthOldData=false;
 header=false;
 censusHeader=false;
+birthOldHeader=false;
+birthOldIndex=false;
 geochart=false;
 colchart=false;
 chartblock=false;
@@ -24,11 +26,20 @@ function loadData() {
 			
 			if ($("#age-selector").css("display")=="none")
 				$("#age-selector").slideDown();
+			if ($("#year-selector").css("display")!="none")
+				$("#year-selector").slideUp();
+		} else if ($("#dataCalc3:checked").val() ) {
+			sliderNewPos="-1400px";
+			
+			if ($("#year-selector").css("display")=="none")
+				$("#year-selector").slideDown();
+			if ($("#age-selector").css("display")!="none")
+				$("#age-selector").slideUp();
 		} else {
 			if ($("#age-selector").css("display")!="none")
 				$("#age-selector").slideUp();
-			if ($("#dataCalc3:checked").val()) 
-				sliderNewPos="-1400px";
+			if ($("#year-selector").css("display")!="none")
+				$("#year-selector").slideUp();
 		}
 		$("#info-box-slider").animate({left:sliderNewPos},1000);
 	});
@@ -63,17 +74,8 @@ function loadData() {
 			censusHeader=data[0].split(",").slice(1);
 			censusData[0]=new Array();
 
-			birth10Data=new Array();
-			birth10Data[0]=new Array();
-			birth10Data[1]=new Array();
-
 			for (var i=1;i<data.length;i++) {
 				raw=data[i].split(",");
-
-				birth10Data[0][i-1]=raw[0];
-				birth10Data[1][i-1]=parseInt(raw[raw.length-1]);
-				raw=raw.slice(0,raw.length-1);
-
 				for (var j=1;j<raw.length;j++)
 					raw[j]=parseInt(raw[j]);
 				censusData[censusData.length]=raw;
@@ -84,13 +86,34 @@ function loadData() {
 			$("#visualizationMap").append("<div style=\"text-align:center; color:red;\">"+l.errorloading1+"<br/>"+textStatus+": "+errorThrown+"</div>");
 		}
 	});
+	$.ajax({
+		url: "/birth/stara_rajdaemost.csv?a",
+		success: function(data) {
+			data=data.replace(/(^\s*)|(\s*$)/g, "").split("\n");
+			birthOldData=new Array();
+			birthOldHeader=data[0].split(",").slice(1);
+			birthOldData[0]=new Array();
+
+			for (var i=1;i<data.length;i++) {
+				raw=data[i].split(",");
+				for (var j=1;j<raw.length;j++)
+					raw[j]=parseInt(raw[j]);
+				birthOldData[birthOldData.length]=raw;
+			}
+			init();
+		},
+		error:function(jqXHR, textStatus, errorThrown) {
+			$("#visualizationMap").append("<div style=\"text-align:center; color:red;\">"+l.errorloading1+"<br/>"+textStatus+": "+errorThrown+"</div>");
+		}
+	});
 }
 
 function init() {
-	if (!birthData || !censusData)
+	if (!birthData || !censusData || !birthOldData)
 		return;
 	startSlider();
 	startCensusSlider();
+	startYearSlider();
 	drawChart();
 }
 
@@ -142,7 +165,7 @@ function drawVisualization(begin, end) {
 		data.addColumn('number', l.to1000people+' '+from+to+' '+l.years);
 	} else
 	if ($("#dataCalc3:checked").val()) {
-		data.addColumn('number', l.change10);
+		data.addColumn('number', l.changeOld+birthOldHeader[birthOldIndex]);
 	}
 	else
 		data.addColumn('number', l.allbirths);
@@ -156,11 +179,12 @@ function drawVisualization(begin, end) {
 
 		if ($("#dataCalc2:checked").val()) {
 			count=count/getCensusCount(birthData[i][0].v)*1000000;
+			count=count*30.5/(end-begin+1);
 			count=Math.round(count)/100;
 			tempData[i]=[ birthData[i][0],  {v:count} ];
 		} else
 		if ($("#dataCalc3:checked").val()) {
-			var bdata = getBirth10Count(birthData[i][0].v,end-begin+1);
+			var bdata = getBirthOldCount(birthData[i][0].v,end-begin+1);
 			count=(count-bdata)/bdata*10000;
 			count=Math.round(count)/100;
 			tempData[i]=[ birthData[i][0], {v: count, f: count+"%"} ];
@@ -218,7 +242,7 @@ function startSlider(){
 		min: 0,
 		max: header.length-1,
 		animate: "fast",
-		values: [ header.length-15 , header.length-1 ],
+		values: [ header.length-90 , header.length-1 ],
 		slide: function( event, ui ) {
 			var left=ui.values[0];
 			var right=ui.values[1];
@@ -235,8 +259,8 @@ function startSlider(){
 			drawChart(colchartregion);
 		}
 	});
-	$( "#date-amount" ).text( header[header.length-15] + " - " + header[header.length-1] );
-	draw(header.length-15 , header.length-1);
+	$( "#date-amount" ).text( header[header.length-90] + " - " + header[header.length-1] );
+	draw(header.length-90 , header.length-1);
 }
 
 function startCensusSlider(){
@@ -253,6 +277,20 @@ function startCensusSlider(){
 	updateCensusCount(5,12);
 }
 
+function startYearSlider(){
+	$( "#slider-year" ).slider({
+		range: false,
+		min: 0,
+		max: birthOldHeader.length-1,
+		animate: "fast",
+		value: 2011,
+		slide: yearSliderSlide,
+		change: yearSliderSlide
+	});
+	$( "#span-year" ).text(birthOldHeader[birthOldHeader.length-1]);
+	updateYearCount(birthOldHeader.length-1);
+}
+
 function censusSliderSlide( event, ui ) {
 	var from=ui.values[0]==18 ? "" : censusHeader[ui.values[0]-1].split("-")[0]+" до ";
 	var to=ui.values[1]==18 ? censusHeader[ui.values[1]-1] : censusHeader[ui.values[1]-1].split("-")[1];
@@ -261,6 +299,11 @@ function censusSliderSlide( event, ui ) {
 	draw();
 }
 
+function yearSliderSlide( event, ui ) {
+	$( "#span-year" ).text( birthOldHeader[ui.value] );
+	updateYearCount(ui.value);
+	draw();
+}
 
 function updateCensusCount(from,to) {
 	for (var j=1;j<censusData.length;j++) {
@@ -270,6 +313,12 @@ function updateCensusCount(from,to) {
 	}
 }
 
+function updateYearCount(index) {
+	for (var j=1;j<birthOldData.length;j++) 
+		birthOldData[0][j-1]=[birthOldData[j][0],birthOldData[j][index+1]];
+	birthOldIndex=index;
+}
+
 function getCensusCount(region) {
 	for (var i=0;i<censusData[0].length;i++)
 		if (censusData[0][i][0]==region)
@@ -277,10 +326,10 @@ function getCensusCount(region) {
 	return 1;
 }
 
-function getBirth10Count(region,days) {
-	for (var i=0;i<birth10Data[0].length;i++)
-		if (birth10Data[0][i]==region)
-			return birth10Data[1][i]*days/365;
+function getBirthOldCount(region,days) {
+	for (var i=0;i<birthOldData[0].length;i++)
+		if (birthOldData[0][i][0]==region)
+			return birthOldData[0][i][1]*days/(birthOldIndex==0 || birthOldIndex==4 ? 366 : 365);
 	return 1;
 }
 

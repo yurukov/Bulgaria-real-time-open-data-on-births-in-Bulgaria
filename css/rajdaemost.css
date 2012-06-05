@@ -48,7 +48,7 @@ h2 {
 	text-align:center;
 	margin:50px;
 }
-#span-age, #date-amount {
+#span-age, #date-amount, #span-year {
 	font-weight:bold;
 }
 #date-warning {
@@ -56,7 +56,7 @@ h2 {
 	color:red; 
 	font-style: italic;
 }
-#date-selector, #age-selector {
+#date-selector, #age-selector, #year-selector {
 	margin-bottom:15px;
 }
 .loading-text {
@@ -92,5 +92,6 @@ h2 {
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #459e00; text-decoration: none; }
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 1px solid #327e04; background: #459e00 url(south-street/images/ui-bg_highlight-hard_15_459e00_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #ffffff; }
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #ffffff; text-decoration: none; }
+.ui-slider-horizontal .ui-slider-handle { background: #459E00 url(images/ui-bg_highlight-hard_15_459e00_1x100.png) 50% 50% repeat-x; }
 
 
